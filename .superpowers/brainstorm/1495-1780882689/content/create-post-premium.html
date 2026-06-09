@@ -1,0 +1,739 @@
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #0f0f1e 100%);
+    min-height: 100vh;
+    color: #e0e0e0;
+  }
+
+  .page-container {
+    padding: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 32px;
+  }
+
+  /* ===== PREMIUM CREATE POST MODAL ===== */
+  .create-post-premium {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(20, 20, 30, 0.9) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 750px;
+    animation: slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ===== HEADER ===== */
+  .modal-header {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 32px;
+    background: linear-gradient(90deg, rgba(34, 197, 94, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .header-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+  }
+
+  .header-text h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 4px;
+  }
+
+  .header-text p {
+    font-size: 12px;
+    color: #999;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .header-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .header-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .header-btn.primary {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    border: none;
+    color: white;
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+  }
+
+  .header-btn.primary:hover {
+    box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4);
+  }
+
+  .close-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.2s;
+    font-size: 24px;
+  }
+
+  .close-icon:hover {
+    color: #e0e0e0;
+    transform: rotate(90deg);
+  }
+
+  /* ===== LEFT SIDE: EDITOR ===== */
+  .modal-left {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    overflow-y: auto;
+    background: linear-gradient(180deg, rgba(26, 26, 26, 0) 0%, rgba(34, 197, 94, 0.02) 100%);
+  }
+
+  .channel-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #22c55e;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .channel-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+
+  .channel-btn {
+    aspect-ratio: 1;
+    border-radius: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, rgba(37, 99, 235, 0.05) 100%);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .channel-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .channel-btn:hover::before {
+    opacity: 1;
+  }
+
+  .channel-btn:hover {
+    border-color: rgba(34, 197, 94, 0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(34, 197, 94, 0.2);
+  }
+
+  .channel-btn.selected {
+    border-color: #22c55e;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(37, 99, 235, 0.15) 100%);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+  }
+
+  .channel-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .channel-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: #999;
+    position: relative;
+    z-index: 1;
+  }
+
+  .channel-btn.selected .channel-name {
+    color: #22c55e;
+  }
+
+  .channel-check {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #22c55e;
+    color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s;
+  }
+
+  .channel-btn.selected .channel-check {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* ===== EDITOR AREA ===== */
+  .editor-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .editor-textarea {
+    background: linear-gradient(135deg, rgba(36, 36, 36, 0.6) 0%, rgba(42, 42, 52, 0.6) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    color: #e0e0e0;
+    font-size: 15px;
+    font-family: inherit;
+    min-height: 160px;
+    resize: none;
+    outline: none;
+    transition: all 0.3s;
+    backdrop-filter: blur(5px);
+  }
+
+  .editor-textarea:focus {
+    border-color: #22c55e;
+    background: linear-gradient(135deg, rgba(36, 36, 36, 0.8) 0%, rgba(42, 42, 52, 0.8) 100%);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1), inset 0 1px 2px rgba(34, 197, 94, 0.1);
+  }
+
+  .editor-textarea::placeholder {
+    color: #666;
+  }
+
+  .editor-toolbar {
+    display: flex;
+    gap: 10px;
+    padding: 12px;
+    background: linear-gradient(135deg, rgba(36, 36, 36, 0.6) 0%, rgba(42, 42, 52, 0.6) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+  }
+
+  .toolbar-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: #e0e0e0;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .toolbar-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .toolbar-divider {
+    width: 1px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* ===== MEDIA UPLOAD ===== */
+  .media-upload {
+    border: 2px dashed rgba(34, 197, 94, 0.3);
+    border-radius: 16px;
+    padding: 48px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.02) 0%, rgba(37, 99, 235, 0.02) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .media-upload::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .media-upload:hover {
+    border-color: #22c55e;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, rgba(37, 99, 235, 0.05) 100%);
+  }
+
+  .media-upload:hover::before {
+    opacity: 1;
+  }
+
+  .media-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .media-text {
+    font-size: 14px;
+    color: #e0e0e0;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .media-hint {
+    font-size: 12px;
+    color: #666;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== RIGHT SIDE: PREVIEW ===== */
+  .modal-right {
+    padding: 32px;
+    background: linear-gradient(180deg, rgba(20, 20, 30, 0) 0%, rgba(34, 197, 94, 0.02) 100%);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    overflow-y: auto;
+  }
+
+  .preview-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+  }
+
+  .preview-info {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid rgba(34, 197, 94, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #22c55e;
+    cursor: help;
+  }
+
+  .preview-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .preview-item {
+    background: linear-gradient(135deg, rgba(36, 36, 36, 0.6) 0%, rgba(42, 42, 52, 0.6) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s;
+    animation: fadeInUp 0.5s ease-out forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .preview-item:hover {
+    border-color: rgba(34, 197, 94, 0.5);
+    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.1);
+  }
+
+  .preview-platform {
+    padding: 12px 16px;
+    background: rgba(34, 197, 94, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 12px;
+    font-weight: 600;
+    color: #22c55e;
+  }
+
+  .preview-content {
+    padding: 16px;
+  }
+
+  .preview-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    margin-bottom: 12px;
+  }
+
+  .preview-text {
+    font-size: 13px;
+    color: #e0e0e0;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .preview-image {
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(135deg, #e11d48 0%, #fb7185 50%, #2563eb 100%);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+  }
+
+  .preview-empty {
+    text-align: center;
+    padding: 32px 16px;
+    color: #666;
+  }
+
+  .preview-empty-text {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* ===== FOOTER ===== */
+  .modal-footer {
+    grid-column: 1 / -1;
+    padding: 20px 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(90deg, rgba(34, 197, 94, 0.05) 0%, rgba(37, 99, 235, 0.05) 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(5px);
+  }
+
+  .footer-info {
+    font-size: 13px;
+    color: #999;
+  }
+
+  .footer-actions {
+    display: flex;
+    gap: 12px;
+  }
+
+  .btn-action {
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: none;
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .btn-publish {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+  }
+
+  .btn-publish:hover {
+    box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4);
+    transform: translateY(-2px);
+  }
+
+  /* ===== SCROLLBAR ===== */
+  .modal-left::-webkit-scrollbar,
+  .modal-right::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .modal-left::-webkit-scrollbar-track,
+  .modal-right::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .modal-left::-webkit-scrollbar-thumb,
+  .modal-right::-webkit-scrollbar-thumb {
+    background: rgba(34, 197, 94, 0.3);
+    border-radius: 3px;
+  }
+
+  .modal-left::-webkit-scrollbar-thumb:hover,
+  .modal-right::-webkit-scrollbar-thumb:hover {
+    background: rgba(34, 197, 94, 0.5);
+  }
+
+  @media (max-width: 1200px) {
+    .create-post-premium {
+      grid-template-columns: 1fr;
+    }
+
+    .modal-right {
+      border-left: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .channel-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .modal-left,
+    .modal-right {
+      padding: 20px;
+    }
+
+    .channel-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .modal-header {
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .header-actions {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+</style>
+
+<div class="page-container">
+  <h1 class="page-title">✍️ Create Post - Premium Design</h1>
+
+  <div class="create-post-premium">
+    <!-- Header -->
+    <div class="modal-header">
+      <div class="header-title">
+        <div class="header-icon">✍️</div>
+        <div class="header-text">
+          <h2>Create Post</h2>
+          <p>Drafts • Smart Schedule</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button class="header-btn">📋 Templates</button>
+        <button class="header-btn">🤖 AI Ideas</button>
+        <button class="header-btn">👁️ Preview</button>
+        <button class="header-btn primary">⬆️ Expand</button>
+        <div class="close-icon">✕</div>
+      </div>
+    </div>
+
+    <!-- Left: Editor -->
+    <div class="modal-left">
+      <!-- Channel Selector -->
+      <div class="channel-section">
+        <div class="section-label">📱 Select Platforms</div>
+        <div class="channel-grid">
+          <button class="channel-btn selected">
+            <div class="channel-icon">📷</div>
+            <div class="channel-name">Instagram</div>
+            <div class="channel-check">✓</div>
+          </button>
+          <button class="channel-btn selected">
+            <div class="channel-icon">♪</div>
+            <div class="channel-name">TikTok</div>
+            <div class="channel-check">✓</div>
+          </button>
+          <button class="channel-btn">
+            <div class="channel-icon">f</div>
+            <div class="channel-name">Facebook</div>
+          </button>
+          <button class="channel-btn">
+            <div class="channel-icon">▶</div>
+            <div class="channel-name">YouTube</div>
+          </button>
+          <button class="channel-btn">
+            <div class="channel-icon">𝕏</div>
+            <div class="channel-name">Twitter</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Text Editor -->
+      <div class="editor-section">
+        <textarea class="editor-textarea" placeholder="✨ Start typing or let AI inspire you with templates..."></textarea>
+
+        <div class="editor-toolbar">
+          <button class="toolbar-btn" title="Add media">+</button>
+          <button class="toolbar-btn" title="Format">A</button>
+          <div class="toolbar-divider"></div>
+          <button class="toolbar-btn" title="Emoji">😊</button>
+          <button class="toolbar-btn" title="Hashtag">#</button>
+          <button class="toolbar-btn" title="Mention">@</button>
+        </div>
+      </div>
+
+      <!-- Media Upload -->
+      <div class="media-upload">
+        <div class="media-icon">🖼️</div>
+        <div class="media-text">Drag your image or video here</div>
+        <div class="media-hint">or click to browse (max 1GB)</div>
+      </div>
+    </div>
+
+    <!-- Right: Preview -->
+    <div class="modal-right">
+      <div class="preview-header">
+        🎬 Post Previews
+        <div class="preview-info">?</div>
+      </div>
+
+      <div class="preview-cards">
+        <!-- Instagram Preview -->
+        <div class="preview-item">
+          <div class="preview-platform">📷 Instagram</div>
+          <div class="preview-content">
+            <div class="preview-avatar"></div>
+            <div class="preview-text">Your content will look amazing across all your selected platforms. Real-time preview helps you craft the perfect post.</div>
+            <div class="preview-image">🎬</div>
+          </div>
+        </div>
+
+        <!-- TikTok Preview -->
+        <div class="preview-item" style="animation-delay: 0.3s;">
+          <div class="preview-platform">♪ TikTok</div>
+          <div class="preview-content">
+            <div class="preview-avatar"></div>
+            <div class="preview-text">Your content will look amazing across all your selected platforms. Real-time preview helps you craft the perfect post.</div>
+            <div class="preview-image">📱</div>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="preview-empty">
+          <div style="font-size: 32px; margin-bottom: 12px;">✨</div>
+          <div class="preview-empty-text">Start typing to see your post preview across all platforms</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer">
+      <div class="footer-info">2 channels selected • Ready to publish</div>
+      <div class="footer-actions">
+        <button class="btn-action btn-secondary">Schedule Later</button>
+        <button class="btn-action btn-publish">🚀 Publish Now</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,578 @@
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e0e0e0; }
+  .screens-container { padding: 40px 20px; max-width: 1600px; margin: 0 auto; }
+  .screen-section { margin-bottom: 60px; }
+  .section-title { font-size: 24px; font-weight: 700; color: white; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #22c55e; }
+  .screen { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; overflow: hidden; margin-bottom: 32px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+  .screen-header { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); padding: 12px 20px; font-size: 13px; font-weight: 600; color: white; }
+  .screen-content { min-height: 400px; padding: 32px; display: flex; flex-direction: column; }
+  .breadcrumb { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 24px; }
+  h2 { font-size: 32px; font-weight: 700; color: white; margin-bottom: 16px; }
+  .subtitle { font-size: 14px; color: #999; margin-bottom: 32px; }
+  .card { background: #242424; border: 1px solid #3a3a3a; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+  .button { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(34, 197, 94, 0.3); }
+  .button-secondary { background: #2a2a2a; color: #e0e0e0; border: 1px solid #3a3a3a; }
+  .button-secondary:hover { background: #333; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .input-group { margin-bottom: 20px; }
+  .label { font-size: 13px; font-weight: 600; color: white; margin-bottom: 8px; display: block; }
+  .input { width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #3a3a3a; border-radius: 8px; color: #e0e0e0; font-size: 14px; }
+  .input:focus { outline: none; border-color: #22c55e; }
+  .badge { display: inline-block; background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 4px 12px; border-radius: 16px; font-size: 11px; font-weight: 600; }
+  .stat { background: #242424; padding: 16px; border-radius: 8px; text-align: center; }
+  .stat-value { font-size: 24px; font-weight: 700; color: #22c55e; }
+  .stat-label { font-size: 12px; color: #999; margin-top: 4px; }
+  .tabs { display: flex; gap: 24px; margin-bottom: 24px; border-bottom: 1px solid #2a2a2a; padding-bottom: 16px; }
+  .tab { font-size: 14px; color: #999; cursor: pointer; font-weight: 500; }
+  .tab.active { color: #22c55e; border-bottom: 2px solid #22c55e; padding-bottom: -16px; }
+  .icon { font-size: 20px; }
+  .flex { display: flex; gap: 12px; }
+  .flex-between { display: flex; justify-content: space-between; align-items: center; }
+  @media (max-width: 768px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+</style>
+
+<div class="screens-container">
+
+<!-- 1. LANDING PAGE -->
+<div class="screen-section">
+  <h3 class="section-title">1️⃣ Landing Page</h3>
+  <div class="screen">
+    <div class="screen-header">Landing - Inicio Público</div>
+    <div class="screen-content">
+      <div style="background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%); padding: 60px 40px; border-radius: 8px; color: white; text-align: center;">
+        <div style="font-size: 12px; background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 8px 16px; border-radius: 20px; width: fit-content; margin: 0 auto 20px; font-weight: 600;">⚡ SOCIAL MEDIA INTELLIGENCE</div>
+        <h1 style="font-size: 48px; margin-bottom: 20px;">Multiplica tu <span style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Impacto Visual</span> en segundos</h1>
+        <p style="font-size: 16px; color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto 40px;">La plataforma de gestión y distribución impulsada por IA creada para artistas y creadores que buscan dominar las tendencias mundiales.</p>
+        <div style="display: flex; gap: 16px; justify-content: center;">
+          <button class="button">🚀 Empezar Gratis</button>
+          <button class="button-secondary" style="color: white; border-color: white;">▶ Ver Demo</button>
+        </div>
+      </div>
+      <div class="grid-3" style="margin-top: 40px;">
+        <div style="text-align: center;">
+          <div style="font-size: 32px; margin-bottom: 8px;">📈</div>
+          <div style="font-weight: 600; color: white;">+800% Retención</div>
+          <div style="font-size: 12px; color: #999;">Distribución multi-canal</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 32px; margin-bottom: 8px;">🎯</div>
+          <div style="font-weight: 600; color: white;">Análisis IA</div>
+          <div style="font-size: 12px; color: #999;">Insights inteligentes</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 32px; margin-bottom: 8px;">⚡</div>
+          <div style="font-weight: 600; color: white;">Rápido & Fácil</div>
+          <div style="font-size: 12px; color: #999;">Publica en segundos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. LOGIN -->
+<div class="screen-section">
+  <h3 class="section-title">2️⃣ Login</h3>
+  <div class="screen">
+    <div class="screen-header">Authentication - Iniciar Sesión</div>
+    <div class="screen-content" style="max-width: 500px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <div style="font-size: 32px; margin-bottom: 16px;">✨</div>
+        <h2 style="margin-bottom: 8px;">Bienvenido de vuelta</h2>
+        <p class="subtitle">Accede a tu cuenta para gestionar tu contenido</p>
+      </div>
+      <div class="input-group">
+        <label class="label">📧 Email</label>
+        <input type="email" class="input" placeholder="tu@email.com">
+      </div>
+      <div class="input-group">
+        <label class="label">🔐 Contraseña</label>
+        <input type="password" class="input" placeholder="••••••••">
+      </div>
+      <button class="button" style="width: 100%; margin-bottom: 16px;">Inicia sesión</button>
+      <div style="text-align: center; font-size: 13px; color: #999;">
+        ¿No tienes cuenta? <a href="#" style="color: #22c55e; text-decoration: none;">Regístrate aquí</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. REGISTER -->
+<div class="screen-section">
+  <h3 class="section-title">3️⃣ Register</h3>
+  <div class="screen">
+    <div class="screen-header">Authentication - Crear Cuenta</div>
+    <div class="screen-content" style="max-width: 500px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <div style="font-size: 32px; margin-bottom: 16px;">🎨</div>
+        <h2 style="margin-bottom: 8px;">Únete a Vidalis</h2>
+        <p class="subtitle">Comienza tu viaje como creador</p>
+      </div>
+      <div class="input-group">
+        <label class="label">👤 Nombre Completo</label>
+        <input type="text" class="input" placeholder="Tu nombre">
+      </div>
+      <div class="input-group">
+        <label class="label">📧 Email</label>
+        <input type="email" class="input" placeholder="tu@email.com">
+      </div>
+      <div class="input-group">
+        <label class="label">🔐 Contraseña</label>
+        <input type="password" class="input" placeholder="••••••••">
+      </div>
+      <button class="button" style="width: 100%; margin-bottom: 16px;">Crear Cuenta</button>
+      <div style="text-align: center; font-size: 13px; color: #999;">
+        ¿Ya tienes cuenta? <a href="#" style="color: #22c55e; text-decoration: none;">Inicia sesión</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. DASHBOARD -->
+<div class="screen-section">
+  <h3 class="section-title">4️⃣ Dashboard Principal</h3>
+  <div class="screen">
+    <div class="screen-header">Dashboard - Inicio</div>
+    <div class="screen-content">
+      <div class="flex-between" style="margin-bottom: 32px;">
+        <div>
+          <h2>Dashboard</h2>
+          <p class="subtitle">Bienvenido, Artista 👋</p>
+        </div>
+        <button class="button">+ Nuevo Video</button>
+      </div>
+      <div style="margin-bottom: 32px;">
+        <div class="breadcrumb">📌 Tu Pipeline de Contenido</div>
+        <div class="grid-5" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
+          <div class="card" style="text-align: center; padding: 16px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; margin: 0 auto 8px;">1</div>
+            <div style="font-size: 12px; font-weight: 600;">Subir</div>
+          </div>
+          <div class="card" style="text-align: center; padding: 16px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #2a2a2a; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; margin: 0 auto 8px;">2</div>
+            <div style="font-size: 12px; font-weight: 600;">Editar</div>
+          </div>
+          <div class="card" style="text-align: center; padding: 16px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #2a2a2a; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; margin: 0 auto 8px;">3</div>
+            <div style="font-size: 12px; font-weight: 600;">Programar</div>
+          </div>
+          <div class="card" style="text-align: center; padding: 16px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #2a2a2a; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; margin: 0 auto 8px;">4</div>
+            <div style="font-size: 12px; font-weight: 600;">Publicar</div>
+          </div>
+          <div class="card" style="text-align: center; padding: 16px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #2a2a2a; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; margin: 0 auto 8px;">5</div>
+            <div style="font-size: 12px; font-weight: 600;">Analizar</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="breadcrumb">🎬 Tus Videos Recientes</div>
+        <div class="grid-3">
+          <div class="card">
+            <div style="width: 100%; height: 150px; background: linear-gradient(135deg, #e11d48 0%, #fb7185 50%, #2563eb 100%); border-radius: 8px; margin-bottom: 12px;"></div>
+            <div style="font-weight: 600; color: white; margin-bottom: 8px;">Mi primer contenido viral</div>
+            <span class="badge" style="margin-bottom: 12px; display: block;">En edición</span>
+            <div style="font-size: 12px; color: #999; margin-bottom: 12px;">Subido hace 2 horas • 2:45</div>
+            <div class="flex">
+              <button class="button-secondary" style="flex: 1; padding: 8px;">Editar</button>
+              <button class="button-secondary" style="flex: 1; padding: 8px;">Publicar</button>
+            </div>
+          </div>
+          <div class="card">
+            <div style="width: 100%; height: 150px; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); border-radius: 8px; margin-bottom: 12px;"></div>
+            <div style="font-weight: 600; color: white; margin-bottom: 8px;">Tutorial - Producción Musical</div>
+            <span class="badge" style="margin-bottom: 12px; display: block; background: rgba(34, 197, 94, 0.2); color: #22c55e;">Programado</span>
+            <div style="font-size: 12px; color: #999; margin-bottom: 12px;">Mañana 10:00 AM • 3:15</div>
+            <div class="flex">
+              <button class="button-secondary" style="flex: 1; padding: 8px;">Ver</button>
+              <button class="button-secondary" style="flex: 1; padding: 8px;">Editar</button>
+            </div>
+          </div>
+          <div class="card">
+            <div style="width: 100%; height: 150px; background: linear-gradient(135deg, #2563eb 0%, #667eea 100%); border-radius: 8px; margin-bottom: 12px;"></div>
+            <div style="font-weight: 600; color: white; margin-bottom: 8px;">Live Performance - Full Set</div>
+            <span class="badge" style="margin-bottom: 12px; display: block; background: rgba(34, 197, 94, 0.2); color: #22c55e;">Publicado</span>
+            <div style="font-size: 12px; color: #999; margin-bottom: 12px;">Hace 3 días • 45.2K views</div>
+            <div class="flex">
+              <button class="button-secondary" style="flex: 1; padding: 8px;">Analytics</button>
+              <button class="button-secondary" style="flex: 1; padding: 8px;">Compartir</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. UPLOAD PAGE -->
+<div class="screen-section">
+  <h3 class="section-title">5️⃣ Upload / Subir Video</h3>
+  <div class="screen">
+    <div class="screen-header">Content - Subir Video</div>
+    <div class="screen-content" style="max-width: 800px; margin: 0 auto;">
+      <h2 style="margin-bottom: 8px;">Sube tu Video</h2>
+      <p class="subtitle">Arrastra tu video o selecciona un archivo (máx 1GB)</p>
+      <div style="border: 2px dashed #3a3a3a; border-radius: 12px; padding: 60px 20px; text-align: center; cursor: pointer; transition: all 0.2s;">
+        <div style="font-size: 48px; margin-bottom: 16px;">📹</div>
+        <div style="font-size: 16px; font-weight: 600; color: white; margin-bottom: 8px;">Arrastra tu video aquí</div>
+        <div style="font-size: 14px; color: #999;">O haz clic para seleccionar</div>
+      </div>
+      <div style="margin-top: 32px;">
+        <label class="label">Título del Video</label>
+        <input type="text" class="input" placeholder="Ej: Mi primer contenido viral">
+      </div>
+      <div style="margin-top: 16px;">
+        <label class="label">Descripción</label>
+        <textarea class="input" style="height: 100px; resize: vertical;" placeholder="Describe tu video..."></textarea>
+      </div>
+      <div style="margin-top: 32px; display: flex; gap: 12px;">
+        <button class="button">Continuar</button>
+        <button class="button-secondary">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 6. CONTENT GALLERY -->
+<div class="screen-section">
+  <h3 class="section-title">6️⃣ Galería de Contenido</h3>
+  <div class="screen">
+    <div class="screen-header">Content - Galería</div>
+    <div class="screen-content">
+      <div class="flex-between" style="margin-bottom: 32px;">
+        <div>
+          <h2>Mi Contenido</h2>
+          <p class="subtitle">15 videos • Ordenado por reciente</p>
+        </div>
+        <div class="flex">
+          <button class="button-secondary">🔍 Filtrar</button>
+          <button class="button">+ Subir Video</button>
+        </div>
+      </div>
+      <div class="grid-4">
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <div style="width: 100%; height: 120px; background: linear-gradient(135deg, #e11d48 0%, #fb7185 100%);"></div>
+          <div style="padding: 12px;">
+            <div style="font-size: 12px; font-weight: 600; color: white; margin-bottom: 4px;">Video 1</div>
+            <div style="font-size: 11px; color: #999;">3 días atrás</div>
+          </div>
+        </div>
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <div style="width: 100%; height: 120px; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);"></div>
+          <div style="padding: 12px;">
+            <div style="font-size: 12px; font-weight: 600; color: white; margin-bottom: 4px;">Video 2</div>
+            <div style="font-size: 11px; color: #999;">5 días atrás</div>
+          </div>
+        </div>
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <div style="width: 100%; height: 120px; background: linear-gradient(135deg, #2563eb 0%, #667eea 100%);"></div>
+          <div style="padding: 12px;">
+            <div style="font-size: 12px; font-weight: 600; color: white; margin-bottom: 4px;">Video 3</div>
+            <div style="font-size: 11px; color: #999;">1 semana atrás</div>
+          </div>
+        </div>
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <div style="width: 100%; height: 120px; background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);"></div>
+          <div style="padding: 12px;">
+            <div style="font-size: 12px; font-weight: 600; color: white; margin-bottom: 4px;">Video 4</div>
+            <div style="font-size: 11px; color: #999;">2 semanas atrás</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 7. VIDEO DETAIL -->
+<div class="screen-section">
+  <h3 class="section-title">7️⃣ Detalles del Video</h3>
+  <div class="screen">
+    <div class="screen-header">Content - Detalles del Video</div>
+    <div class="screen-content">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+        <div>
+          <div style="width: 100%; height: 300px; background: linear-gradient(135deg, #e11d48 0%, #fb7185 50%, #2563eb 100%); border-radius: 12px; margin-bottom: 20px;"></div>
+          <h2 style="margin-bottom: 8px;">Mi primer contenido viral</h2>
+          <p class="subtitle">Subido hace 3 días • 2:45 min</p>
+          <div class="grid-2" style="margin-top: 20px;">
+            <div class="stat">
+              <div class="stat-value">45.2K</div>
+              <div class="stat-label">Visualizaciones</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">2.1K</div>
+              <div class="stat-label">Interacciones</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="margin-bottom: 24px;">
+            <label class="label">Título</label>
+            <input type="text" class="input" value="Mi primer contenido viral">
+          </div>
+          <div style="margin-bottom: 24px;">
+            <label class="label">Descripción</label>
+            <textarea class="input" style="height: 100px;">Este es mi contenido más viral...</textarea>
+          </div>
+          <div style="margin-bottom: 24px;">
+            <label class="label">Etiquetas</label>
+            <input type="text" class="input" placeholder="#viral #contenido #artista">
+          </div>
+          <div class="flex">
+            <button class="button">Guardar Cambios</button>
+            <button class="button-secondary">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 8. ANALYTICS -->
+<div class="screen-section">
+  <h3 class="section-title">8️⃣ Dashboard de Analíticas</h3>
+  <div class="screen">
+    <div class="screen-header">Analytics - Análisis</div>
+    <div class="screen-content">
+      <h2 style="margin-bottom: 32px;">Analíticas Generales</h2>
+      <div class="grid-4" style="margin-bottom: 32px;">
+        <div class="stat">
+          <div class="stat-value">245.8K</div>
+          <div class="stat-label">Visualizaciones Totales</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">12.4K</div>
+          <div class="stat-label">Interacciones</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">8.2K</div>
+          <div class="stat-label">Seguidores Nuevos</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">4.2%</div>
+          <div class="stat-label">Tasa de Engagement</div>
+        </div>
+      </div>
+      <div class="tabs">
+        <div class="tab active">Resumen</div>
+        <div class="tab">Por Video</div>
+        <div class="tab">Por Plataforma</div>
+      </div>
+      <div style="background: #242424; border-radius: 12px; padding: 32px; text-align: center; color: #999;">
+        <div style="font-size: 48px; margin-bottom: 16px;">📊</div>
+        <div>Gráfico de tendencias - Visualizaciones últimos 7 días</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 9. GROWTH PRO -->
+<div class="screen-section">
+  <h3 class="section-title">9️⃣ Growth Pro</h3>
+  <div class="screen">
+    <div class="screen-header">Growth - Crecimiento Inteligente</div>
+    <div class="screen-content">
+      <h2 style="margin-bottom: 8px;">Growth Pro 🚀</h2>
+      <p class="subtitle">Herramientas AI para maximizar tu crecimiento</p>
+      <div class="grid-3" style="margin-top: 32px;">
+        <div class="card" style="border-left: 4px solid #22c55e;">
+          <div style="font-size: 28px; margin-bottom: 12px;">🤖</div>
+          <div style="font-weight: 600; color: white; margin-bottom: 8px;">Content Ideas</div>
+          <div style="font-size: 12px; color: #999; margin-bottom: 16px;">AI sugiere ideas virales basadas en tendencias</div>
+          <button class="button-secondary">Explorar</button>
+        </div>
+        <div class="card" style="border-left: 4px solid #22c55e;">
+          <div style="font-size: 28px; margin-bottom: 12px;">📅</div>
+          <div style="font-weight: 600; color: white; margin-bottom: 8px;">Best Time to Post</div>
+          <div style="font-size: 12px; color: #999; margin-bottom: 16px;">Publica cuando tu audiencia está más activa</div>
+          <button class="button-secondary">Ver Horarios</button>
+        </div>
+        <div class="card" style="border-left: 4px solid #22c55e;">
+          <div style="font-size: 28px; margin-bottom: 12px;">👥</div>
+          <div style="font-weight: 600; color: white; margin-bottom: 8px;">Audience Analysis</div>
+          <div style="font-size: 12px; color: #999; margin-bottom: 16px;">Entiende a tu audiencia en profundidad</div>
+          <button class="button-secondary">Analizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 10. CONNECT SOCIAL -->
+<div class="screen-section">
+  <h3 class="section-title">🔟 Conectar Redes Sociales</h3>
+  <div class="screen">
+    <div class="screen-header">Social - Conectar Canales</div>
+    <div class="screen-content" style="max-width: 700px; margin: 0 auto;">
+      <h2 style="margin-bottom: 8px;">Conecta tus Redes Sociales</h2>
+      <p class="subtitle">Publica a múltiples plataformas simultáneamente</p>
+      <div style="margin-top: 32px;">
+        <div class="grid-2">
+          <div class="card" style="cursor: pointer; border: 2px solid #3a3a3a; transition: all 0.2s;">
+            <div style="font-size: 32px; margin-bottom: 12px;">📷</div>
+            <div style="font-weight: 600; color: white; margin-bottom: 4px;">Instagram</div>
+            <div style="font-size: 12px; color: #999; margin-bottom: 16px;">Conectado ✓</div>
+            <button class="button-secondary" style="width: 100%;">Desconectar</button>
+          </div>
+          <div class="card" style="cursor: pointer; border: 2px solid #3a3a3a; transition: all 0.2s;">
+            <div style="font-size: 32px; margin-bottom: 12px;">f</div>
+            <div style="font-weight: 600; color: white; margin-bottom: 4px;">Facebook</div>
+            <div style="font-size: 12px; color: #999; margin-bottom: 16px;">Conectado ✓</div>
+            <button class="button-secondary" style="width: 100%;">Desconectar</button>
+          </div>
+          <div class="card" style="cursor: pointer; border: 2px solid #3a3a3a; transition: all 0.2s;">
+            <div style="font-size: 32px; margin-bottom: 12px;">▶</div>
+            <div style="font-weight: 600; color: white; margin-bottom: 4px;">YouTube</div>
+            <div style="font-size: 12px; color: #999; margin-bottom: 16px;">No conectado</div>
+            <button class="button" style="width: 100%;">Conectar</button>
+          </div>
+          <div class="card" style="cursor: pointer; border: 2px solid #3a3a3a; transition: all 0.2s;">
+            <div style="font-size: 32px; margin-bottom: 12px;">♪</div>
+            <div style="font-weight: 600; color: white; margin-bottom: 4px;">TikTok</div>
+            <div style="font-size: 12px; color: #999; margin-bottom: 16px;">No conectado</div>
+            <button class="button" style="width: 100%;">Conectar</button>
+          </div>
+          <div class="card" style="cursor: pointer; border: 2px solid #3a3a3a; transition: all 0.2s;">
+            <div style="font-size: 32px; margin-bottom: 12px;">in</div>
+            <div style="font-weight: 600; color: white; margin-bottom: 4px;">LinkedIn</div>
+            <div style="font-size: 12px; color: #999; margin-bottom: 16px;">No conectado</div>
+            <button class="button" style="width: 100%;">Conectar</button>
+          </div>
+          <div class="card" style="cursor: pointer; border: 2px solid #3a3a3a; transition: all 0.2s;">
+            <div style="font-size: 32px; margin-bottom: 12px;">𝕏</div>
+            <div style="font-weight: 600; color: white; margin-bottom: 4px;">Twitter / X</div>
+            <div style="font-size: 12px; color: #999; margin-bottom: 16px;">No conectado</div>
+            <button class="button" style="width: 100%;">Conectar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 11. CREATE POST / PUBLISH -->
+<div class="screen-section">
+  <h3 class="section-title">1️⃣1️⃣ Crear / Publicar Post</h3>
+  <div class="screen">
+    <div class="screen-header">Social - Crear y Publicar</div>
+    <div class="screen-content">
+      <h2 style="margin-bottom: 8px;">✍️ Crear Post</h2>
+      <p class="subtitle">Escribe una vez, publica en todas tus redes</p>
+      <div style="display: grid; grid-template-columns: 1fr 300px; gap: 32px; margin-top: 32px;">
+        <div>
+          <div style="margin-bottom: 20px;">
+            <label class="label">Contenido</label>
+            <textarea class="input" style="height: 200px; padding: 16px;" placeholder="Escribe tu contenido..."></textarea>
+          </div>
+          <div style="border: 2px dashed #3a3a3a; border-radius: 12px; padding: 40px 20px; text-align: center;">
+            <div style="font-size: 32px; margin-bottom: 12px;">🖼️</div>
+            <div style="font-size: 14px; color: #999;">Arrastra una imagen o video aquí</div>
+          </div>
+        </div>
+        <div>
+          <label class="label">Selecciona Plataformas</label>
+          <div class="flex" style="flex-direction: column; gap: 8px;">
+            <div style="padding: 12px; background: #242424; border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="checkbox" checked> 📷 Instagram
+            </div>
+            <div style="padding: 12px; background: #242424; border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="checkbox" checked> ♪ TikTok
+            </div>
+            <div style="padding: 12px; background: #242424; border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="checkbox"> f Facebook
+            </div>
+            <div style="padding: 12px; background: #242424; border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="checkbox"> 𝕏 Twitter
+            </div>
+          </div>
+          <button class="button" style="width: 100%; margin-top: 16px;">Publicar Ahora</button>
+          <button class="button-secondary" style="width: 100%; margin-top: 8px;">Programar Publicación</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 12. ONBOARDING - USER TYPE -->
+<div class="screen-section">
+  <h3 class="section-title">1️⃣2️⃣ Onboarding - Tipo de Usuario</h3>
+  <div class="screen">
+    <div class="screen-header">Onboarding - ¿Quién eres?</div>
+    <div class="screen-content" style="max-width: 900px; margin: 0 auto; text-align: center;">
+      <h2 style="margin-bottom: 32px;">¿Cómo te describirías?</h2>
+      <div class="grid-2">
+        <div class="card" style="padding: 24px; cursor: pointer; border: 2px solid #3a3a3a; transition: all 0.2s;">
+          <div style="font-size: 40px; margin-bottom: 12px;">👨‍🎨</div>
+          <div style="font-weight: 600; color: white;">Solo creator</div>
+          <div style="font-size: 12px; color: #999; margin-top: 4px;">Artista gestionando tu contenido</div>
+        </div>
+        <div class="card" style="padding: 24px; cursor: pointer; border: 2px solid #3a3a3a; transition: all 0.2s;">
+          <div style="font-size: 40px; margin-bottom: 12px;">🏢</div>
+          <div style="font-weight: 600; color: white;">Small Business Owner</div>
+          <div style="font-size: 12px; color: #999; margin-top: 4px;">Manejando una marca</div>
+        </div>
+        <div class="card" style="padding: 24px; cursor: pointer; border: 2px solid #3a3a3a; transition: all 0.2s;">
+          <div style="font-size: 40px; margin-bottom: 12px;">🎬</div>
+          <div style="font-weight: 600; color: white;">Agency / Team</div>
+          <div style="font-size: 12px; color: #999; margin-top: 4px;">Múltiples cuentas</div>
+        </div>
+        <div class="card" style="padding: 24px; cursor: pointer; border: 2px solid #3a3a3a; transition: all 0.2s;">
+          <div style="font-size: 40px; margin-bottom: 12px;">⭐</div>
+          <div style="font-weight: 600; color: white;">Otro</div>
+          <div style="font-size: 12px; color: #999; margin-top: 4px;">Algo diferente</div>
+        </div>
+      </div>
+      <div style="margin-top: 32px; display: flex; gap: 12px; justify-content: center;">
+        <button class="button">Continuar →</button>
+        <button class="button-secondary">Saltar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 13. SETTINGS -->
+<div class="screen-section">
+  <h3 class="section-title">1️⃣3️⃣ Configuración de Cuenta</h3>
+  <div class="screen">
+    <div class="screen-header">Settings - Configuración</div>
+    <div class="screen-content" style="max-width: 600px; margin: 0 auto;">
+      <h2 style="margin-bottom: 32px;">Configuración de Cuenta</h2>
+      <div style="border-bottom: 1px solid #2a2a2a; margin-bottom: 24px;">
+        <div style="padding-bottom: 16px; margin-bottom: 16px;">
+          <label class="label">Nombre de Perfil</label>
+          <input type="text" class="input" value="Juan Artista">
+        </div>
+      </div>
+      <div style="border-bottom: 1px solid #2a2a2a; margin-bottom: 24px;">
+        <div style="padding-bottom: 16px; margin-bottom: 16px;">
+          <label class="label">Email</label>
+          <input type="email" class="input" value="juan@email.com">
+        </div>
+      </div>
+      <div style="border-bottom: 1px solid #2a2a2a; margin-bottom: 24px;">
+        <div style="padding-bottom: 16px; margin-bottom: 16px;">
+          <label class="label">Contraseña</label>
+          <button class="button-secondary" style="width: 100%;">Cambiar Contraseña</button>
+        </div>
+      </div>
+      <div style="border-bottom: 1px solid #2a2a2a; margin-bottom: 24px;">
+        <div style="padding-bottom: 16px; margin-bottom: 16px;">
+          <label class="label" style="display: flex; align-items: center; gap: 8px;">
+            <input type="checkbox" checked>
+            Recibir notificaciones por email
+          </label>
+        </div>
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <button class="button">Guardar Cambios</button>
+        <button class="button-secondary">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

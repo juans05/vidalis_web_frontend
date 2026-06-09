@@ -1,0 +1,652 @@
+<style>
+  .pages-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .page-mockup {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+  }
+
+  .page-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .page-content {
+    min-height: 500px;
+    overflow-y: auto;
+  }
+
+  /* Landing Page */
+  .landing {
+    background: linear-gradient(180deg, #0f0f1e 0%, #1a1a2e 100%);
+    color: white;
+    padding: 60px 40px;
+    text-align: center;
+  }
+
+  .landing-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 80px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .landing-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  .landing-nav-links {
+    display: flex;
+    gap: 40px;
+    font-size: 14px;
+  }
+
+  .landing-nav-links a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .landing-nav-links a:hover {
+    color: white;
+  }
+
+  .landing-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .landing-hero {
+    margin: 60px 0;
+  }
+
+  .landing-hero h1 {
+    font-size: 48px;
+    margin: 20px 0;
+    line-height: 1.2;
+  }
+
+  .landing-hero .highlight {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .landing-hero p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.7);
+    max-width: 600px;
+    margin: 20px auto;
+    line-height: 1.6;
+  }
+
+  .landing-cta {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin: 40px 0;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .btn-secondary {
+    background: white;
+    color: #667eea;
+    border: 2px solid white;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .landing-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .feature-item {
+    text-align: center;
+  }
+
+  .feature-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .feature-item h3 {
+    font-size: 16px;
+    margin: 12px 0 8px;
+  }
+
+  .feature-item p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* Auth Pages */
+  .auth-container {
+    display: flex;
+    gap: 0;
+    background: white;
+  }
+
+  .auth-left {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 60px 40px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 600px;
+  }
+
+  .auth-left h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .auth-left p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+  }
+
+  .auth-right {
+    padding: 60px 40px;
+    flex: 1;
+    background: #f9f9f9;
+  }
+
+  .auth-right h3 {
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    font-size: 24px;
+  }
+
+  .auth-right p {
+    color: #666;
+    margin-bottom: 32px;
+    font-size: 14px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+
+  .form-submit {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .form-link {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 13px;
+  }
+
+  .form-link a {
+    color: #667eea;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* Dashboard - Full app layout */
+  .dashboard-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    background: #f5f7fa;
+    min-height: 600px;
+  }
+
+  .dashboard-sidebar {
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 12px;
+  }
+
+  .dashboard-logo {
+    font-weight: 700;
+    font-size: 16px;
+    padding: 8px 12px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dashboard-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .dashboard-nav-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dashboard-nav-item:hover {
+    background: rgba(255,255,255,0.2);
+  }
+
+  .dashboard-nav-item.active {
+    background: rgba(255,255,255,0.3);
+    border-left: 3px solid #00ff88;
+    padding-left: 13px;
+  }
+
+  .dashboard-main {
+    padding: 32px;
+    overflow-y: auto;
+  }
+
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .dashboard-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .btn-new-video {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .pipeline-stages {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .stage-card {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  .stage-number {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .stage-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .videos-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .video-item {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .video-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+  }
+
+  .video-thumbnail {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: white;
+  }
+
+  .video-info {
+    padding: 16px;
+  }
+
+  .video-title {
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+
+  .video-status {
+    display: inline-block;
+    background: #e0f0ff;
+    color: #0066cc;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .video-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .video-actions button {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: #667eea;
+    transition: all 0.2s;
+  }
+
+  .video-actions button:hover {
+    background: #f0f4ff;
+    border-color: #667eea;
+  }
+</style>
+
+<h2>Páginas Principales - Diseño Rediseñado</h2>
+<p class="subtitle">Landing, Auth y Dashboard con el nuevo estilo moderno</p>
+
+<h3 style="margin-top: 32px; margin-bottom: 16px;">🌐 Landing Page</h3>
+<div class="page-mockup">
+  <div class="page-header">Landing Page - Inicio</div>
+  <div class="page-content">
+    <div class="landing">
+      <div class="landing-nav">
+        <div class="landing-logo">
+          <span style="font-size: 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">✨</span>
+          Vidalis
+        </div>
+        <div class="landing-nav-links">
+          <a>Funciones</a>
+          <a>Nosotros</a>
+          <a>Documentación</a>
+        </div>
+        <button class="landing-btn">↗ Acceso Directo</button>
+      </div>
+
+      <div class="landing-hero">
+        <div style="display: inline-block; background: rgba(102, 126, 234, 0.2); color: #667eea; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 20px;">⚡ SOCIAL MEDIA INTELLIGENCE</div>
+
+        <h1>
+          Multiplica tu <span class="highlight">Impacto Visual</span> en segundos.
+        </h1>
+
+        <p>
+          La plataforma de gestión y distribución impulsada por IA creada para agencias<br>
+          y creadores que buscan dominar las tendencias mundiales.
+        </p>
+
+        <div class="landing-cta">
+          <button class="btn-primary">🚀 Empezar Gratis</button>
+          <button class="btn-secondary">▶ Ver Demo</button>
+        </div>
+      </div>
+
+      <div class="landing-features">
+        <div class="feature-item">
+          <div class="feature-icon">📈</div>
+          <h3>+800% Retención Media</h3>
+          <p>Distribución multi-canal optimizada por IA</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🎯</div>
+          <h3>Distribución Multi-Canal</h3>
+          <p>Publica a todas tus redes simultáneamente</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🤖</div>
+          <h3>AI-Driven Analysis</h3>
+          <p>Analíticas inteligentes y predicciones</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 style="margin-top: 32px; margin-bottom: 16px;">🔐 Página de Login</h3>
+<div class="page-mockup">
+  <div class="page-header">Authentication - Login</div>
+  <div class="page-content" style="display: flex;">
+    <div class="auth-container" style="width: 100%; display: flex;">
+      <div class="auth-left">
+        <h2>Bienvenido de vuelta</h2>
+        <p>
+          Accede a tu cuenta para gestionar tus videos, publicar en redes sociales y analizar el impacto de tu contenido.
+        </p>
+      </div>
+      <div class="auth-right">
+        <h3>Inicia sesión</h3>
+        <p>Usa tu email y contraseña</p>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="tu@email.com">
+        </div>
+
+        <div class="form-group">
+          <label>Contraseña</label>
+          <input type="password" placeholder="••••••••">
+        </div>
+
+        <button class="form-submit">Inicia sesión</button>
+
+        <div class="form-link">
+          ¿No tienes cuenta? <a>Regístrate aquí</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 style="margin-top: 32px; margin-bottom: 16px;">📊 Dashboard Principal</h3>
+<div class="page-mockup">
+  <div class="page-header">App Dashboard - Pipeline Visual</div>
+  <div class="page-content" style="display: flex; background: #f5f7fa;">
+    <div class="dashboard-layout" style="width: 100%;">
+      <div class="dashboard-sidebar">
+        <div class="dashboard-logo">
+          <span style="font-size: 18px;">✨</span>
+          Vidalis
+        </div>
+        <div class="dashboard-nav">
+          <div class="dashboard-nav-item active">📊 Dashboard</div>
+          <div class="dashboard-nav-item">📹 Contenido</div>
+          <div class="dashboard-nav-item">📱 Redes Sociales</div>
+          <div class="dashboard-nav-item">📈 Analíticas</div>
+          <div class="dashboard-nav-item">🚀 Growth Pro</div>
+        </div>
+      </div>
+
+      <div class="dashboard-main">
+        <div class="dashboard-header">
+          <div>
+            <div class="dashboard-title">Dashboard</div>
+            <p style="color: #999; font-size: 14px; margin: 4px 0;">Tus videos y análisis en tiempo real</p>
+          </div>
+          <button class="btn-new-video">+ Nuevo Video</button>
+        </div>
+
+        <div style="margin-bottom: 32px;">
+          <div style="font-size: 13px; font-weight: 600; color: #666; margin-bottom: 12px; text-transform: uppercase;">PIPELINE DE CONTENIDO</div>
+          <div class="pipeline-stages">
+            <div class="stage-card">
+              <div class="stage-number">1</div>
+              <div class="stage-name">Subir</div>
+            </div>
+            <div class="stage-card">
+              <div class="stage-number">2</div>
+              <div class="stage-name">Editar</div>
+            </div>
+            <div class="stage-card">
+              <div class="stage-number">3</div>
+              <div class="stage-name">Programar</div>
+            </div>
+            <div class="stage-card">
+              <div class="stage-number">4</div>
+              <div class="stage-name">Publicar</div>
+            </div>
+            <div class="stage-card">
+              <div class="stage-number">5</div>
+              <div class="stage-name">Analizar</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 13px; font-weight: 600; color: #666; margin-bottom: 12px; text-transform: uppercase;">TUS VIDEOS</div>
+        <div class="videos-list">
+          <div class="video-item">
+            <div class="video-thumbnail">🎬</div>
+            <div class="video-info">
+              <div class="video-title">Mi primer contenido viral</div>
+              <span class="video-status">En edición</span>
+              <div class="video-actions">
+                <button>Editar</button>
+                <button>Publicar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-item">
+            <div class="video-thumbnail">🎥</div>
+            <div class="video-info">
+              <div class="video-title">Tutorial - Producción Musical</div>
+              <span class="video-status" style="background: #f0f0f0; color: #333;">Programado</span>
+              <div class="video-actions">
+                <button>Ver</button>
+                <button>Editar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-item">
+            <div class="video-thumbnail">🎞️</div>
+            <div class="video-info">
+              <div class="video-title">Live Performance - Full Set</div>
+              <span class="video-status" style="background: #e0ffe0; color: #00aa00;">Publicado</span>
+              <div class="video-actions">
+                <button>Analytics</button>
+                <button>Compartir</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 32px; padding: 20px; background: #f0f4ff; border-radius: 8px; border-left: 4px solid #667eea;">
+  <h4 style="margin-top: 0; color: #667eea;">📝 Resumen de Diseño</h4>
+  <ul style="margin: 8px 0;">
+    <li><strong>Landing:</strong> Dark mode moderno con gradientes, CTA claros, 3 features destacadas</li>
+    <li><strong>Auth:</strong> Split layout (izq: pitch + dcha: form), minimalista y profesional</li>
+    <li><strong>Dashboard:</strong> Sidebar + main, pipeline visual 1-5, tarjetas de video con acciones rápidas</li>
+  </ul>
+</div>

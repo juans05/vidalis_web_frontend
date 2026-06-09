@@ -1,0 +1,674 @@
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    background: #0f0f0f;
+    color: #e0e0e0;
+  }
+
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    margin: 40px 0 20px;
+    padding: 0 20px;
+  }
+
+  /* ===== DASHBOARD BUFFER-STYLE ===== */
+  .buffer-dashboard {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+    background: #0f0f0f;
+  }
+
+  .buffer-sidebar {
+    background: #1a1a1a;
+    padding: 24px 12px;
+    border-right: 1px solid #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .sidebar-logo {
+    font-weight: 700;
+    font-size: 18px;
+    color: white;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-new {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 24px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-new:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.3);
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sidebar-nav-item {
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: #999;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sidebar-nav-item:hover {
+    background: #2a2a2a;
+    color: #e0e0e0;
+  }
+
+  .sidebar-nav-item.active {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+  }
+
+  .sidebar-divider {
+    height: 1px;
+    background: #2a2a2a;
+  }
+
+  .sidebar-section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0 16px;
+    margin: 8px 0;
+  }
+
+  .sidebar-channel {
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #999;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sidebar-channel:hover {
+    background: #2a2a2a;
+    color: #e0e0e0;
+  }
+
+  .channel-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+  }
+
+  .buffer-main {
+    padding: 32px 40px;
+    overflow-y: auto;
+  }
+
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .main-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+  }
+
+  .header-controls {
+    display: flex;
+    gap: 12px;
+  }
+
+  .btn-secondary {
+    background: #2a2a2a;
+    color: #e0e0e0;
+    border: 1px solid #3a3a3a;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover {
+    background: #333;
+    border-color: #444;
+  }
+
+  .content-tabs {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #2a2a2a;
+    padding-bottom: 16px;
+  }
+
+  .tab {
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .tab:hover {
+    color: #e0e0e0;
+  }
+
+  .tab.active {
+    color: #22c55e;
+  }
+
+  .tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -16px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #22c55e;
+  }
+
+  .videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+  }
+
+  .video-card {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .video-card:hover {
+    border-color: #3a3a3a;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .video-thumbnail {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #e11d48 0%, #fb7185 50%, #2563eb 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .video-thumbnail::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    top: 20px;
+    right: 20px;
+  }
+
+  .video-card-content {
+    padding: 20px;
+  }
+
+  .video-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .video-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .video-status {
+    display: inline-block;
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .video-time {
+    font-size: 12px;
+    color: #666;
+  }
+
+  .video-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .video-action {
+    flex: 1;
+    padding: 8px 12px;
+    background: #2a2a2a;
+    border: 1px solid #3a3a3a;
+    color: #e0e0e0;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .video-action:hover {
+    background: #333;
+    border-color: #444;
+  }
+
+  /* ===== ONBOARDING PAGES ===== */
+  .onboarding-container {
+    min-height: 100vh;
+    background: #0f0f0f;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+  }
+
+  .onboarding-header {
+    font-size: 36px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 40px;
+    text-align: center;
+    max-width: 700px;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+    max-width: 900px;
+    margin-bottom: 32px;
+  }
+
+  .option-card {
+    background: #1a1a1a;
+    border: 2px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .option-card:hover {
+    border-color: #22c55e;
+    background: #1f1f1f;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.1);
+  }
+
+  .option-card.selected {
+    border-color: #22c55e;
+    background: rgba(34, 197, 94, 0.05);
+  }
+
+  .option-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    background: linear-gradient(135deg, #e11d48 0%, #fb7185 100%);
+    flex-shrink: 0;
+  }
+
+  .option-content {
+    flex: 1;
+  }
+
+  .option-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 4px;
+  }
+
+  .option-description {
+    font-size: 13px;
+    color: #999;
+    line-height: 1.4;
+  }
+
+  .option-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #3a3a3a;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .option-card.selected .option-checkbox {
+    background: #22c55e;
+    border-color: #22c55e;
+  }
+
+  .onboarding-actions {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    border: none;
+    padding: 14px 40px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 400px;
+    justify-content: center;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+  }
+
+  .btn-skip {
+    background: transparent;
+    color: #666;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .btn-skip:hover {
+    color: #999;
+  }
+
+  /* ===== SOCIAL ICONS GRID ===== */
+  .social-icons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    max-width: 900px;
+  }
+
+  .social-icon-card {
+    background: #1a1a1a;
+    border: 2px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .social-icon-card:hover {
+    border-color: #22c55e;
+    transform: translateY(-4px);
+  }
+
+  .social-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+
+  .social-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+  }
+
+  @media (max-width: 1024px) {
+    .buffer-dashboard {
+      grid-template-columns: 1fr;
+    }
+
+    .buffer-sidebar {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .videos-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .options-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<h2 class="section-title">📊 Dashboard - Estilo Buffer</h2>
+
+<div class="buffer-dashboard">
+  <div class="buffer-sidebar">
+    <div class="sidebar-logo">
+      <span style="font-size: 20px;">✨</span>
+      Vidalis
+    </div>
+
+    <button class="btn-new">+ New</button>
+
+    <div class="sidebar-nav">
+      <div class="sidebar-nav-item active">
+        <span>📊</span>
+        All Channels
+      </div>
+      <div class="sidebar-nav-item">
+        <span>✏️</span>
+        Create
+      </div>
+      <div class="sidebar-nav-item">
+        <span>📅</span>
+        Publish
+      </div>
+      <div class="sidebar-nav-item">
+        <span>👥</span>
+        Community
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section-label">Connect channels</div>
+
+    <div class="sidebar-channel">
+      <div class="channel-icon" style="background: #E1306C;">📷</div>
+      <span>Instagram</span>
+    </div>
+    <div class="sidebar-channel">
+      <div class="channel-icon" style="background: #1877F2;">f</div>
+      <span>Facebook</span>
+    </div>
+    <div class="sidebar-channel">
+      <div class="channel-icon" style="background: #FF0000;">▶</div>
+      <span>YouTube</span>
+    </div>
+
+    <div style="font-size: 12px; color: #666; padding: 0 16px; margin-top: 12px;">+ More channels</div>
+  </div>
+
+  <div class="buffer-main">
+    <div class="main-header">
+      <div class="main-title">All Channels</div>
+      <div class="header-controls">
+        <button class="btn-secondary">📅 Calendar</button>
+        <button class="btn-secondary">+ New Post</button>
+      </div>
+    </div>
+
+    <div class="content-tabs">
+      <div class="tab active">Queue <span style="color: #666;">0</span></div>
+      <div class="tab">Drafts <span style="color: #666;">0</span></div>
+      <div class="tab">Approvals <span style="color: #22c55e;">⚡</span></div>
+      <div class="tab">Sent <span style="color: #666;">0</span></div>
+    </div>
+
+    <div style="text-align: center; padding: 60px 20px; color: #666;">
+      <div style="font-size: 48px; margin-bottom: 20px;">📝</div>
+      <div style="font-size: 18px; font-weight: 600; color: white; margin-bottom: 8px;">Welcome to Vidalis</div>
+      <div>Connect a channel to start posting and managing your content</div>
+      <div style="margin-top: 20px;">
+        <button class="btn-new" style="width: auto; padding: 12px 28px;">+ Connect a Channel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 class="section-title">🎯 Onboarding - User Type Selection</h2>
+
+<div class="onboarding-container">
+  <div class="onboarding-header">How would you describe yourself?</div>
+
+  <div class="options-grid">
+    <div class="option-card">
+      <div class="option-icon">👨‍🎨</div>
+      <div class="option-content">
+        <div class="option-title">Solo creator</div>
+        <div class="option-description">Artist or influencer managing your own content</div>
+      </div>
+      <div class="option-checkbox"></div>
+    </div>
+
+    <div class="option-card">
+      <div class="option-icon">🏢</div>
+      <div class="option-content">
+        <div class="option-title">Small business owner</div>
+        <div class="option-description">Running a brand or business account</div>
+      </div>
+      <div class="option-checkbox"></div>
+    </div>
+
+    <div class="option-card">
+      <div class="option-icon">🎬</div>
+      <div class="option-content">
+        <div class="option-title">Agency / Marketing team</div>
+        <div class="option-description">Managing multiple brand accounts</div>
+      </div>
+      <div class="option-checkbox"></div>
+    </div>
+
+    <div class="option-card">
+      <div class="option-icon">⭐</div>
+      <div class="option-content">
+        <div class="option-title">Other</div>
+        <div class="option-description">Something else</div>
+      </div>
+      <div class="option-checkbox"></div>
+    </div>
+  </div>
+
+  <div class="onboarding-actions">
+    <button class="btn-primary">Continue →</button>
+    <button class="btn-skip">Skip</button>
+  </div>
+</div>
+
+<h2 class="section-title">📱 Onboarding - Social Channels Selection</h2>
+
+<div class="onboarding-container">
+  <div class="onboarding-header">What social channel(s) are in focus?</div>
+
+  <div class="social-icons-grid" style="max-width: 900px; margin: 0 auto 40px;">
+    <div class="social-icon-card">
+      <div class="social-icon">📷</div>
+      <div class="social-name">Instagram</div>
+    </div>
+    <div class="social-icon-card">
+      <div class="social-icon">f</div>
+      <div class="social-name">Facebook</div>
+    </div>
+    <div class="social-icon-card">
+      <div class="social-icon">𝕏</div>
+      <div class="social-name">Twitter / X</div>
+    </div>
+    <div class="social-icon-card">
+      <div class="social-icon">in</div>
+      <div class="social-name">LinkedIn</div>
+    </div>
+    <div class="social-icon-card">
+      <div class="social-icon">♪</div>
+      <div class="social-name">TikTok</div>
+    </div>
+    <div class="social-icon-card">
+      <div class="social-icon">▶</div>
+      <div class="social-name">YouTube</div>
+    </div>
+  </div>
+
+  <div class="onboarding-actions">
+    <button class="btn-primary">Continue →</button>
+    <button class="btn-skip">Skip</button>
+  </div>
+</div>

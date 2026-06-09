@@ -1,0 +1,612 @@
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    background: #0f0f0f;
+    color: #e0e0e0;
+  }
+
+  .page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    margin: 40px 20px 20px;
+  }
+
+  /* ===== CREATE POST MODAL ===== */
+  .create-post-modal {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    margin: 20px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    min-height: 700px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-header {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 32px;
+    border-bottom: 1px solid #2a2a2a;
+    background: #141414;
+  }
+
+  .modal-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .modal-title-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+  }
+
+  .modal-subtitle {
+    font-size: 13px;
+    color: #666;
+    margin-left: 42px;
+  }
+
+  .modal-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .control-btn {
+    background: #2a2a2a;
+    color: #e0e0e0;
+    border: 1px solid #3a3a3a;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .control-btn:hover {
+    background: #333;
+    border-color: #444;
+  }
+
+  .control-btn.primary {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    border: none;
+    color: white;
+  }
+
+  .control-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.3);
+  }
+
+  .close-btn {
+    background: transparent;
+    border: none;
+    color: #666;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .close-btn:hover {
+    color: #e0e0e0;
+  }
+
+  /* ===== MAIN CONTENT ===== */
+  .modal-left {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .channel-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .channel-selector-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .channel-avatars {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .channel-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e11d48 0%, #fb7185 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+    position: relative;
+  }
+
+  .channel-avatar:hover {
+    transform: scale(1.05);
+    border-color: #22c55e;
+  }
+
+  .channel-avatar.selected {
+    border-color: #22c55e;
+    box-shadow: 0 0 0 2px #0f0f0f, 0 0 12px rgba(34, 197, 94, 0.3);
+  }
+
+  .channel-avatar.select-all {
+    background: #2a2a2a;
+    border: 2px dashed #3a3a3a;
+  }
+
+  .channel-avatar-check {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #22c55e;
+    color: #0f0f0f;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* ===== EDITOR AREA ===== */
+  .editor-area {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .editor-input {
+    background: #242424;
+    border: 1px solid #3a3a3a;
+    border-radius: 12px;
+    padding: 20px;
+    color: #e0e0e0;
+    font-size: 16px;
+    font-family: inherit;
+    resize: none;
+    outline: none;
+    min-height: 180px;
+    transition: all 0.2s;
+  }
+
+  .editor-input:focus {
+    border-color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+  }
+
+  .editor-input::placeholder {
+    color: #666;
+  }
+
+  .editor-toolbar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 16px;
+    background: #242424;
+    border-radius: 12px;
+    border: 1px solid #3a3a3a;
+  }
+
+  .toolbar-btn {
+    width: 40px;
+    height: 40px;
+    background: #1a1a1a;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e0e0e0;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 18px;
+  }
+
+  .toolbar-btn:hover {
+    background: #2a2a2a;
+    border-color: #444;
+  }
+
+  .toolbar-divider {
+    width: 1px;
+    height: 24px;
+    background: #3a3a3a;
+  }
+
+  .media-upload {
+    border: 2px dashed #3a3a3a;
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .media-upload:hover {
+    border-color: #22c55e;
+    background: rgba(34, 197, 94, 0.05);
+  }
+
+  .media-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .media-text {
+    font-size: 14px;
+    color: #999;
+    line-height: 1.5;
+  }
+
+  /* ===== RIGHT SIDEBAR ===== */
+  .modal-right {
+    background: #141414;
+    padding: 32px;
+    border-left: 1px solid #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .preview-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+  }
+
+  .preview-info-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #3a3a3a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #666;
+    cursor: help;
+  }
+
+  .preview-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .preview-item {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .preview-header-social {
+    padding: 12px 16px;
+    border-bottom: 1px solid #2a2a2a;
+    font-size: 12px;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+  }
+
+  .preview-card {
+    padding: 16px;
+  }
+
+  .preview-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e11d48 0%, #fb7185 100%);
+    margin-bottom: 12px;
+  }
+
+  .preview-text {
+    font-size: 13px;
+    color: #e0e0e0;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .preview-image {
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, #e11d48 0%, #fb7185 50%, #2563eb 100%);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+  }
+
+  .preview-stats {
+    display: flex;
+    gap: 8px;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .preview-empty {
+    padding: 40px 20px;
+    text-align: center;
+    color: #666;
+  }
+
+  .preview-empty-text {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* ===== FOOTER ===== */
+  .modal-footer {
+    grid-column: 1 / -1;
+    padding: 20px 32px;
+    border-top: 1px solid #2a2a2a;
+    background: #141414;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-info {
+    font-size: 12px;
+    color: #666;
+  }
+
+  .footer-actions {
+    display: flex;
+    gap: 12px;
+  }
+
+  .btn-secondary {
+    background: #2a2a2a;
+    color: #e0e0e0;
+    border: 1px solid #3a3a3a;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover {
+    background: #333;
+    border-color: #444;
+  }
+
+  .btn-publish {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-publish:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.3);
+  }
+
+  @media (max-width: 1200px) {
+    .create-post-modal {
+      grid-template-columns: 1fr;
+    }
+
+    .modal-right {
+      border-left: none;
+      border-top: 1px solid #2a2a2a;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .modal-header {
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .modal-controls {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .channel-avatars {
+      justify-content: center;
+    }
+  }
+</style>
+
+<h2 class="page-title">📝 Create Post - Publicar a múltiples canales</h2>
+
+<div class="create-post-modal">
+  <!-- Header -->
+  <div class="modal-header">
+    <div class="modal-title">
+      <span style="font-size: 24px;">✍️</span>
+      <div>
+        <div class="modal-title-text">Create Post</div>
+        <div class="modal-subtitle">Draft • Tags</div>
+      </div>
+    </div>
+
+    <div class="modal-controls">
+      <button class="control-btn">📋 Templates</button>
+      <button class="control-btn">🤖 AI Assistant</button>
+      <button class="control-btn">👁️ Preview</button>
+      <button class="control-btn">↗</button>
+      <button class="close-btn">✕</button>
+    </div>
+  </div>
+
+  <!-- Left: Editor -->
+  <div class="modal-left">
+    <!-- Channel Selector -->
+    <div class="channel-selector">
+      <div class="channel-selector-label">Select All</div>
+      <div class="channel-avatars">
+        <div class="channel-avatar select-all" title="Select all channels">
+          ✓
+        </div>
+        <div class="channel-avatar selected" title="Instagram">
+          📷
+          <div class="channel-avatar-check">✓</div>
+        </div>
+        <div class="channel-avatar selected" title="Facebook">
+          f
+          <div class="channel-avatar-check">✓</div>
+        </div>
+        <div class="channel-avatar selected" title="TikTok">
+          ♪
+          <div class="channel-avatar-check">✓</div>
+        </div>
+        <div class="channel-avatar" title="YouTube">
+          ▶
+        </div>
+        <div class="channel-avatar" title="LinkedIn">
+          in
+        </div>
+        <div class="channel-avatar" title="Twitter/X">
+          𝕏
+        </div>
+        <div class="channel-avatar" title="Pinterest">
+          P
+        </div>
+        <div class="channel-avatar" title="Threads">
+          @
+        </div>
+        <div class="channel-avatar" title="Bluesky">
+          ☁️
+        </div>
+      </div>
+    </div>
+
+    <!-- Editor -->
+    <div class="editor-area">
+      <textarea class="editor-input" placeholder="Start writing or get inspired with Templates"></textarea>
+
+      <!-- Toolbar -->
+      <div class="editor-toolbar">
+        <button class="toolbar-btn" title="Add media">+</button>
+        <button class="toolbar-btn" title="Format">▼</button>
+        <div class="toolbar-divider"></div>
+        <button class="toolbar-btn" title="Add emoji">😊</button>
+        <button class="toolbar-btn" title="Add hashtag">#</button>
+      </div>
+
+      <!-- Media Upload -->
+      <div class="media-upload">
+        <div class="media-icon">🖼️</div>
+        <div class="media-text">Drag & drop or select a file</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Preview -->
+  <div class="modal-right">
+    <div class="preview-header">
+      Post Previews
+      <div class="preview-info-icon">?</div>
+    </div>
+
+    <div class="preview-container">
+      <!-- Instagram Preview -->
+      <div class="preview-item">
+        <div class="preview-header-social">📷 Instagram</div>
+        <div class="preview-card">
+          <div class="preview-avatar"></div>
+          <div class="preview-text">Your content will appear here with real-time preview across all platforms</div>
+          <div class="preview-image">🎬</div>
+          <div class="preview-stats">
+            <span>❤️ 0 likes</span>
+            <span>💬 0 comments</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TikTok Preview -->
+      <div class="preview-item">
+        <div class="preview-header-social">♪ TikTok</div>
+        <div class="preview-card">
+          <div class="preview-avatar"></div>
+          <div class="preview-text">Your content will appear here with real-time preview across all platforms</div>
+          <div class="preview-image">📱</div>
+          <div class="preview-stats">
+            <span>❤️ 0 likes</span>
+            <span>💬 0 comments</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Facebook Preview -->
+      <div class="preview-item">
+        <div class="preview-header-social">f Facebook</div>
+        <div class="preview-card">
+          <div class="preview-avatar"></div>
+          <div class="preview-text">Your content will appear here with real-time preview across all platforms</div>
+          <div class="preview-image">👥</div>
+          <div class="preview-stats">
+            <span>👍 0 reactions</span>
+            <span>💬 0 comments</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="modal-footer">
+    <div class="footer-info">3 channels selected • Ready to publish</div>
+    <div class="footer-actions">
+      <button class="btn-secondary">Save as Draft</button>
+      <button class="btn-publish">Publish Now</button>
+    </div>
+  </div>
+</div>

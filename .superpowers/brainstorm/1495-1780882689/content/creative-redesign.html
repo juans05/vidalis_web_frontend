@@ -1,0 +1,755 @@
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Fredoka', sans-serif;
+  }
+
+  .design-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+  }
+
+  .design-section {
+    margin: 40px 0;
+  }
+
+  .mockup-container {
+    border: 2px solid #f0f0f0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  }
+
+  .mockup-label {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 20px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  /* ===== NEW LOGIN DESIGN ===== */
+  .login-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 700px;
+    background: white;
+  }
+
+  .login-left {
+    background: linear-gradient(135deg, #E11D48 0%, #FB7185 50%, #2563EB 100%);
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .login-left::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    top: -100px;
+    right: -100px;
+  }
+
+  .login-left::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    bottom: -50px;
+    left: -50px;
+  }
+
+  .login-left-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+  }
+
+  .login-left h2 {
+    font-size: 40px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .login-left p {
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.95;
+    margin-bottom: 40px;
+  }
+
+  .login-features {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .feature-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    opacity: 0.9;
+  }
+
+  .feature-icon {
+    width: 24px;
+    height: 24px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+
+  .login-right {
+    padding: 60px 40px;
+    background: #FAFAFA;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .login-form-header {
+    margin-bottom: 40px;
+  }
+
+  .login-form-header h3 {
+    font-size: 28px;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .login-form-header p {
+    color: #666;
+    font-size: 14px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #E0E0E0;
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: 'Nunito', sans-serif;
+    transition: all 0.2s;
+    box-sizing: border-box;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: #E11D48;
+    box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.1);
+  }
+
+  .login-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #E11D48 0%, #FB7185 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Fredoka', sans-serif;
+  }
+
+  .login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(225, 29, 72, 0.3);
+  }
+
+  .login-footer {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+  }
+
+  .login-footer a {
+    color: #E11D48;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  /* ===== NEW DASHBOARD DESIGN ===== */
+  .dashboard-container {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 700px;
+    background: #F8F9FA;
+  }
+
+  .dashboard-sidebar {
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+    padding: 24px 16px;
+    color: white;
+    position: relative;
+  }
+
+  .sidebar-logo {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sidebar-nav-item {
+    padding: 12px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .sidebar-nav-item:hover {
+    background: rgba(255,255,255,0.1);
+    color: white;
+  }
+
+  .sidebar-nav-item.active {
+    background: linear-gradient(135deg, #E11D48 0%, #FB7185 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+  }
+
+  .dashboard-main {
+    padding: 40px;
+    overflow-y: auto;
+  }
+
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .dashboard-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .dashboard-cta {
+    background: linear-gradient(135deg, #E11D48 0%, #FB7185 100%);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Fredoka', sans-serif;
+    transition: all 0.3s;
+    font-size: 14px;
+  }
+
+  .dashboard-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(225, 29, 72, 0.3);
+  }
+
+  .pipeline-section {
+    margin-bottom: 40px;
+  }
+
+  .section-label {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .pipeline-stages {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .stage-badge {
+    background: white;
+    padding: 16px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .stage-badge:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  }
+
+  .stage-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #E11D48 0%, #FB7185 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    margin: 0 auto 8px;
+    font-family: 'Fredoka', sans-serif;
+  }
+
+  .stage-name {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .video-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .video-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+  }
+
+  .video-thumbnail {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(135deg, #E11D48 0%, #FB7185 50%, #2563EB 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .video-thumbnail::before {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    top: -50px;
+    right: -50px;
+  }
+
+  .video-info {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .video-title {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+
+  .video-status {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(225, 29, 72, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+    color: #E11D48;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    width: fit-content;
+    margin-bottom: 16px;
+  }
+
+  .video-meta {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 16px;
+  }
+
+  .video-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+  }
+
+  .video-action-btn {
+    flex: 1;
+    padding: 10px 12px;
+    border: 2px solid #E11D48;
+    background: white;
+    color: #E11D48;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Fredoka', sans-serif;
+  }
+
+  .video-action-btn:hover {
+    background: #E11D48;
+    color: white;
+  }
+
+  .design-notes {
+    background: linear-gradient(135deg, #FFF1F2 0%, #FEF9E7 100%);
+    border-left: 4px solid #E11D48;
+    padding: 24px;
+    border-radius: 12px;
+    margin: 40px 0;
+  }
+
+  .design-notes h4 {
+    color: #E11D48;
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+
+  .design-notes ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .design-notes li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .design-notes li::before {
+    content: '✓';
+    color: #E11D48;
+    font-weight: 700;
+  }
+
+  @media (max-width: 1200px) {
+    .login-container {
+      grid-template-columns: 1fr;
+    }
+
+    .login-left {
+      padding: 40px;
+      min-height: auto;
+    }
+
+    .pipeline-stages {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-container {
+      grid-template-columns: 1fr;
+    }
+
+    .dashboard-sidebar {
+      display: none;
+    }
+
+    .dashboard-main {
+      padding: 24px;
+    }
+
+    .videos-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stage-badge {
+      padding: 12px;
+    }
+
+    .stage-number {
+      width: 32px;
+      height: 32px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<div class="design-header">
+  <h2>🎨 Rediseño Creativo - Login & Dashboard</h2>
+  <p>Design System: Vibrant & Block-based con tipografía Fredoka + Nunito</p>
+  <p style="margin-top: 8px; font-size: 13px; opacity: 0.9;">Colores: Rose #E11D48 + Pink #FB7185 + Blue #2563EB | Formas orgánicas | Animaciones suaves</p>
+</div>
+
+<div class="design-section">
+  <h3>🔐 New Login Design - Más Colorido & Divertido</h3>
+  <div class="mockup-container">
+    <div class="mockup-label">Login Page - Split Layout Creativo</div>
+    <div class="login-container">
+      <div class="login-left">
+        <div class="login-left-content">
+          <h2>Bienvenido, Artista</h2>
+          <p>Tu plataforma para dominar redes sociales y convertir tu contenido en un fenómeno viral.</p>
+
+          <div class="login-features">
+            <div class="feature-line">
+              <div class="feature-icon">📱</div>
+              <span>Publica a múltiples plataformas simultáneamente</span>
+            </div>
+            <div class="feature-line">
+              <div class="feature-icon">📊</div>
+              <span>Analíticas en tiempo real + AI insights</span>
+            </div>
+            <div class="feature-line">
+              <div class="feature-icon">🚀</div>
+              <span>Aumenta tu alcance hasta 800%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-right">
+        <div class="login-form-header">
+          <h3>Inicia sesión</h3>
+          <p>Continúa tu viaje como creador</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">📧 Email</label>
+          <input type="email" class="form-input" placeholder="tu@email.com">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">🔐 Contraseña</label>
+          <input type="password" class="form-input" placeholder="••••••••">
+        </div>
+
+        <button class="login-btn">Inicia sesión 🎯</button>
+
+        <div class="login-footer">
+          ¿No tienes cuenta? <a href="#">Regístrate gratis</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="design-notes">
+    <h4>✨ Mejoras en Login:</h4>
+    <ul>
+      <li>Gradiente vibrante (Rose → Pink → Blue) en lado izquierdo</li>
+      <li>Formas orgánicas circulares (blobs) de fondo</li>
+      <li>Tipografía Fredoka + Nunito para tono creativo</li>
+      <li>Inputs con borde de 2px y focus estado rosa</li>
+      <li>Botones con gradiente y hover effect (translateY + shadow)</li>
+      <li>Emojis estratégicos para guiar al usuario</li>
+    </ul>
+  </div>
+</div>
+
+<div class="design-section">
+  <h3>📊 New Dashboard Design - Pipeline Visual + Cards Dinámicas</h3>
+  <div class="mockup-container">
+    <div class="mockup-label">Dashboard - Sidebar Dark + Main Colorful</div>
+    <div class="dashboard-container">
+      <div class="dashboard-sidebar">
+        <div class="sidebar-logo">
+          <span style="font-size: 24px;">✨</span>
+          Vidalis
+        </div>
+
+        <div class="sidebar-nav">
+          <div class="sidebar-nav-item active">
+            <span style="font-size: 18px;">📊</span>
+            Dashboard
+          </div>
+          <div class="sidebar-nav-item">
+            <span style="font-size: 18px;">📹</span>
+            Contenido
+          </div>
+          <div class="sidebar-nav-item">
+            <span style="font-size: 18px;">📱</span>
+            Redes Sociales
+          </div>
+          <div class="sidebar-nav-item">
+            <span style="font-size: 18px;">📈</span>
+            Analíticas
+          </div>
+          <div class="sidebar-nav-item">
+            <span style="font-size: 18px;">🚀</span>
+            Growth Pro
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-main">
+        <div class="dashboard-header">
+          <div>
+            <div class="dashboard-title">Dashboard</div>
+          </div>
+          <button class="dashboard-cta">+ Nuevo Video</button>
+        </div>
+
+        <div class="pipeline-section">
+          <div class="section-label">📌 Tu Pipeline de Contenido</div>
+          <div class="pipeline-stages">
+            <div class="stage-badge">
+              <div class="stage-number">1</div>
+              <div class="stage-name">Subir</div>
+            </div>
+            <div class="stage-badge">
+              <div class="stage-number">2</div>
+              <div class="stage-name">Editar</div>
+            </div>
+            <div class="stage-badge">
+              <div class="stage-number">3</div>
+              <div class="stage-name">Programar</div>
+            </div>
+            <div class="stage-badge">
+              <div class="stage-number">4</div>
+              <div class="stage-name">Publicar</div>
+            </div>
+            <div class="stage-badge">
+              <div class="stage-number">5</div>
+              <div class="stage-name">Analizar</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pipeline-section">
+          <div class="section-label">🎬 Tus Videos</div>
+          <div class="videos-grid">
+            <div class="video-card">
+              <div class="video-thumbnail">🎬</div>
+              <div class="video-info">
+                <div class="video-title">Mi primer contenido viral</div>
+                <div class="video-status">En edición</div>
+                <div class="video-meta">Subido hace 2 horas • 2:45</div>
+                <div class="video-actions">
+                  <button class="video-action-btn">Editar</button>
+                  <button class="video-action-btn">Publicar</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="video-card">
+              <div class="video-thumbnail">🎥</div>
+              <div class="video-info">
+                <div class="video-title">Tutorial - Producción Musical</div>
+                <div class="video-status">Programado</div>
+                <div class="video-meta">Mañana 10:00 AM • 3:15</div>
+                <div class="video-actions">
+                  <button class="video-action-btn">Ver</button>
+                  <button class="video-action-btn">Editar</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="video-card">
+              <div class="video-thumbnail">🎞️</div>
+              <div class="video-info">
+                <div class="video-title">Live Performance - Full Set</div>
+                <div class="video-status">Publicado</div>
+                <div class="video-meta">Hace 3 días • 45.2K views</div>
+                <div class="video-actions">
+                  <button class="video-action-btn">Analytics</button>
+                  <button class="video-action-btn">Compartir</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="design-notes">
+    <h4>✨ Mejoras en Dashboard:</h4>
+    <ul>
+      <li>Sidebar oscuro (dark navy) con nav items activos en gradiente rose</li>
+      <li>Pipeline visual con 5 etapas y números dentro de circles gradientes</li>
+      <li>Cards con gradientes vibrantes en thumbnails</li>
+      <li>Hover effects: translateY (-8px) + shadow enhancement</li>
+      <li>Status badges con gradientes semi-transparentes</li>
+      <li>Buttons con border rose y hover fill (color swap)</li>
+      <li>Espaciado generoso (16-24px) para layout limpio</li>
+      <li>Rounded corners: 12-16px para look moderno</li>
+      <li>Responsive: 3 cols → 1 col en mobile</li>
+    </ul>
+  </div>
+</div>
+
+<div class="design-notes" style="background: linear-gradient(135deg, #E8F5E9 0%, #E3F2FD 100%); border-left-color: #2563EB;">
+  <h4 style="color: #2563EB;">📐 Design System Applied:</h4>
+  <ul style="--bullet-color: #2563EB;">
+    <li><strong>Typography:</strong> Fredoka (headings - playful) + Nunito (body - friendly)</li>
+    <li><strong>Primary Colors:</strong> Rose #E11D48 + Pink #FB7185 + Blue #2563EB</li>
+    <li><strong>Style:</strong> Vibrant & Block-based con formas orgánicas</li>
+    <li><strong>Effects:</strong> Smooth transitions 0.2-0.3s, hover scale, shadows enhancing</li>
+    <li><strong>Animation:</strong> Subtle: hover translateY, focus states, smooth color changes</li>
+    <li><strong>Spacing:</strong> 8dp system - 12px / 16px / 24px / 40px gaps</li>
+    <li><strong>Accessibility:</strong> Focus states visibles, contrast 4.5:1, keyboard navigation</li>
+  </ul>
+</div>
